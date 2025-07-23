@@ -1,55 +1,127 @@
-PlantPulse 🌱
-Welcome to PlantPulse – an innovative ML and DL-powered platform designed to support precision agriculture by offering recommendations on crop selection, fertilizer usage, and plant disease management. This project aims to provide a comprehensive tool for farmers to enhance their agricultural practices using cutting-edge technology.
 
-🚀 Overview
-PlantPulse leverages the power of Machine Learning (ML) and Deep Learning (DL) to offer valuable insights and recommendations for modern farming. The platform includes three main applications:
+# 🌿 Plant-Advisory-and-Disease-Detection-System
 
-Crop Recommendation: Helps users choose the optimal crop based on soil data.
-Fertilizer Recommendation: Suggests the best fertilizers and soil amendments based on the type of crop and current soil conditions.
-Plant Disease Prediction: Identifies plant diseases from images of diseased leaves and provides information on possible treatments.
-💡 Motivation
-Agriculture is a cornerstone of many economies, particularly in countries like India, where a significant portion of the population relies on farming for their livelihood. As new technologies such as ML and DL are integrated into agriculture, they offer promising solutions for optimizing crop yield and farming efficiency. PlantPulse is designed to showcase how these technologies can be applied to make farming more precise and data-driven.
+![Banner](./assets/banner.jpg) 
 
-⚙️ Features
-1. Crop Recommendation
-Functionality: Users can input soil data (e.g., pH, nutrient levels) into the system.
-Output: The application predicts the most suitable crops to grow based on the provided soil conditions.
-2. Fertilizer Recommendation
-Functionality: Users can enter information about their soil and the type of crop they are growing.
-Output: The system analyzes the soil data to recommend necessary fertilizers and soil amendments to improve crop health and yield.
-3. Plant Disease Prediction
-Functionality: Users upload images of diseased plant leaves.
-Output: The application identifies the disease, provides information about it, and suggests possible treatments or preventive measures.
-⚠️ Disclaimer
-PlantPulse is a Proof of Concept (POC) and is intended for demonstration purposes only. The data used in this project is provided without any guarantee from the creator. Do not use this tool for making real-world farming decisions. The creator is not responsible for any outcomes resulting from the use of this application. However, the project illustrates the potential applications of ML and DL in precision farming when developed on a larger scale with verified data.
+An AI-powered web application for real-time plant disease detection, multilingual crop advisory, and personalized plant care. This project combines machine learning, computer vision, weather integration, and chatbot support to assist farmers and gardeners effectively.
 
-📦 Installation
-Clone the repository:
+---
 
-bash
-Copy code
-git clone https://github.com/Vishu011/PlantPulse.git
-Navigate to the project directory:
+## 🚀 Features
 
-bash
-Copy code
-cd PlantPulse
-Install the required dependencies:
+- 🌱 **Plant Disease Detection** via image upload (supports 38+ conditions)
+- 🤖 **AI-Powered Chatbot** using Gemini / ChatOllama
+- ☁️ **Weather Integration** with geolocation-based crop suggestions
+- 🌐 **Multilingual Support** for user queries and responses
+- 🌗 **Dark & Light Mode Themes**
+- 🧠 **Gemini Pro + FAISS Search** for contextual crop advisory
+- 🏷️ Real-time translation, image analysis, and treatment suggestions
 
-bash
-Copy code
+---
+
+## 🖼️ Screenshots
+
+### 👨‍🌾 User Interface
+
+- **Home Page**
+  ![Home](./assets/home.png)
+
+- **Best Crop to Grow**
+  ![Crop](./assets/crops.png)
+
+- **Fertilizers**
+  ![Fertilizers](./assets/fertilizers.png)
+
+- **Diseases**
+  ![Diseases](./assets/diseases.png)
+
+- **Disease-Prediction**
+  ![Disease-Prediction](./assets/disease-prediction.png)
+
+---
+
+## 🧰 Tech Stack
+
+- Python (Flask)
+- Google Gemini API / ChatOllama
+- OpenCV
+- FAISS for Knowledge Retrieval
+- Geolocation & Weather API (OpenWeatherMap)
+- HTML/CSS/JavaScript (Frontend)
+- GitHub Actions (CI/CD optional)
+
+---
+
+## 📦 Installation
+
+### 🔁 Clone this Repository
+
+```bash
+git clone https://github.com/ShivarajNKengannavar/Plant-Advisory-and-Disease-Detection-System.git
+cd Plant-Advisory-and-Disease-Detection-System
+````
+
+### Setup
+
+```bash
+cd app
+python -m venv .venv
+source .venv/bin/activate  # Or `.venv\Scripts\activate` on Windows
 pip install -r requirements.txt
-Run the application:
+```
 
-bash
-Copy code
+---
+
+## ▶️ Usage
+
+1. Activate your virtual environment
+2. Start the backend server:
+
+```bash
 python app.py
-🌟 Future Work
-Data Expansion: Integrate more diverse and verified datasets.
-Enhanced Models: Improve the accuracy of ML/DL models.
-User Feedback: Incorporate user feedback to refine features and functionality.
-📢 Acknowledgements
-This project is inspired by the advancements in ML and DL for agriculture. Special thanks to the agricultural research community and technology enthusiasts who continually push the boundaries of precision farming.
+```
 
-📬 Contact
-For more information or inquiries, please reach out to lakshyacool011@example.com.
+3. Open your browser at:
+   `http://127.0.0.1:5000` (Flask)
+---
+
+## 💻 System Requirements
+
+* Python 3.8+
+* Stable Internet (for weather/Gemini API)
+
+---
+
+## 🛡️ Notes
+
+* The Gemini API is used securely with an `.env` file — do not hardcode your key.
+* Images are not stored; only real-time inference is performed.
+* All translations and weather queries are handled via free/public APIs.
+* Chatbot falls back to a local model (ChatOllama) if Gemini fails.
+
+---
+
+## 👨‍💻 Developer
+
+**Shivaraj N Kengannavar**
+📧 Email: [shivarajnkengannavar@gmail.com](mailto:shivarajnkengannavar@gmail.com)
+🔗 [LinkedIn](https://www.linkedin.com/in/shivarajkengannavar/)
+📂 [More Projects](https://github.com/ShivarajNKengannavar)
+
+---
+
+## 🤝 Contributing
+
+We welcome all kinds of contributions — bug fixes, feature suggestions, UI enhancements, and documentation improvements!
+
+1. Fork the repo
+2. Create your feature branch: `git checkout -b feature/AmazingFeature`
+3. Commit your changes: `git commit -m 'Add amazing feature'`
+4. Push to the branch: `git push origin feature/AmazingFeature`
+5. Open a Pull Request
+
+---
+
+> ⭐ **Thank you for visiting this project! Your feedback, stars, and forks help the project grow!**
+
+
