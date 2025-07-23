@@ -24,7 +24,7 @@ An AI-powered web application for real-time plant disease detection, multilingua
 ### 👨‍🌾 User Interface
 
 - **Home Page**
-  ![Home](./assets/home.png)
+  ![Home](./assets/homepage.png)
 
 - **Best Crop to Grow**
   ![Crop](./assets/crops.png)
@@ -122,6 +122,6 @@ We welcome all kinds of contributions — bug fixes, feature suggestions, UI enh
 
 ---
 
-> ⭐ **Thank you for visiting this project! Your feedback, stars, and forks help the project grow!**
+>               ⭐ **Thank you for visiting this project! Your feedback, stars, and forks help the project grow!**
 
 
