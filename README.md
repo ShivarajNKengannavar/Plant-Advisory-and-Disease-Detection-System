@@ -12,9 +12,7 @@ An AI-powered web application for real-time plant disease detection, multilingua
 ![License](https://img.shields.io/github/license/ShivarajNKengannavar/Plant-Advisory-and-Disease-Detection-System)
 ![Last Commit](https://img.shields.io/github/last-commit/ShivarajNKengannavar/Plant-Advisory-and-Disease-Detection-System)
 ![Repo Size](https://img.shields.io/github/repo-size/ShivarajNKengannavar/Plant-Advisory-and-Disease-Detection-System)
-![Issues](https://img.shields.io/github/issues/ShivarajNKengannavar/Plant-Advisory-and-Disease-Detection-System)
-![Pull Requests](https://img.shields.io/github/issues-pr/ShivarajNKengannavar/Plant-Advisory-and-Disease-Detection-System)
-![Stars](https://img.shields.io/github/stars/ShivarajNKengannavar/Plant-Advisory-and-Disease-Detection-System?style=social)
+
 
 ## 🚀 Features
 
