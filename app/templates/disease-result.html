@@ -1,0 +1,27 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+<div class="container py-2 mx-auto my-5" style="margin: 9rem;">
+    <div class="row">
+        <div class="col-sm py-2 py-md-3">
+            <div class="card card-body text-center" style="justify-content: center; background-color: var(--card-bg-color, blanchedalmond);">
+                <h4 class="theme-text" style="font-size: 24px;">
+                    Disease Prediction: <strong>{{ prediction }}</strong>
+                </h4>
+
+                {% if confidence %}
+                <p class="theme-text" style="font-size: 20px;">
+                    Confidence Score: <strong>{{ confidence }}%</strong>
+                </p>
+                {% endif %}
+
+                {% if translated %}
+                <hr>
+                <h5 class="theme-text">Translated Diagnosis:</h5>
+                <p class="theme-text" style="font-size: 18px;"><strong>{{ translated }}</strong></p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

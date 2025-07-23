@@ -1,0 +1,98 @@
+# Dataset and references
+Data_to_consider/
+"New Plant Diseases Dataset(Augmented)"/
+References/
+Docs/
+
+# System
+.DS_Store
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+
+# Jupyter
+.ipynb_checkpoints/
+*.ipynb
+
+# IDE/editor
+.vscode/
+
+# Secrets
+config.py
+!config_sample.py
+
+# Virtual environment
+env/
+venv/
+
+# Test or project-specific folders
+TEST_Project/
+
+# ===================== #
+# 📁 DATASETS & DOCS
+# ===================== #
+Data_to_consider/
+"New Plant Diseases Dataset(Augmented)"/
+References/
+Docs/
+
+# ===================== #
+# 💻 SYSTEM FILES
+# ===================== #
+.DS_Store
+
+# ===================== #
+# 🐍 PYTHON FILES
+# ===================== #
+__pycache__/
+*.py[cod]
+*.egg-info/
+
+# ===================== #
+# 📓 JUPYTER NOTEBOOKS
+# ===================== #
+.ipynb_checkpoints/
+*.ipynb
+
+# ===================== #
+# 🛠️ IDE/EDITOR FILES
+# ===================== #
+.vscode/
+
+# ===================== #
+# 🔐 SECRETS & CONFIG
+# ===================== #
+config.py
+!config_sample.py
+
+# ===================== #
+# 🐍 VIRTUAL ENVIRONMENT
+# ===================== #
+env/
+venv/
+.venv/
+
+# ===================== #
+# 🧪 TEST & TEMP FOLDERS
+# ===================== #
+TEST_Project/
+
+# Python virtual environment
+venv/
+.venv/
+
+# Byte-code files
+*.pyc
+__pycache__/
+
+# Operating System files
+.DS_Store # macOS
+Thumbs.db # Windows
+
+# Large model files to be managed by LFS (if you forget LFS, don't commit them directly)
+*.pkl
+*.h5
+*.pth
+*.onnx

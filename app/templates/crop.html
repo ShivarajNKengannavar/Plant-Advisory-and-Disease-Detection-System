@@ -1,0 +1,192 @@
+{% extends 'layout.html' %} {% block body %}
+
+<style>
+    /* Remove html body background-color to allow theme to control it */
+    /* .theme-text is defined in layout.html */
+
+    /* --- Specific Font Size Increases for Crop.html --- */
+
+    /* Main page title: "Farm Fortune: Your Best Crop Awaits! 💰🌾" */
+    h2.theme-text b {
+        font-size: 2.5em !important; /* Retained previous increase for main title */
+        line-height: 1.2;
+    }
+
+    /* Labels: Nitrogen, Phosphorous, Pottasium, Temperature, Humidity, pH Level, Rainfall */
+    .form-group label.theme-text b {
+        font-size: 1.3em !important; /* Increased font size for labels (e.g., 1.3em for even more prominence) */
+    }
+
+    /* Input placeholders and text within inputs */
+    .form-control {
+        font-size: 1.1em !important; /* Retained previous increase for input fields */
+    }
+    .form-control::placeholder {
+        font-size: 1.1em !important; /* Ensure placeholder matches */
+    }
+
+    /* Prediction Result: "You should grow ... in your farm" */
+    .card-body h1.theme-text b {
+        font-size: 1.5em !important; /* Retained previous increase for the result */
+    }
+
+    /* General button font size (for "Predict") */
+    .btn {
+        font-size: 1.2em !important; /* Retained previous increase for button font size */
+        height: 55px !important; /* Adjust height to fit larger text */
+        width: 150px !important; /* Adjust width if needed */
+    }
+
+    /* Ensure inputs and selects respect theme in dark mode */
+    body.dark-mode .form-control,
+    body.dark-mode select.form-control {
+        background-color: #3a3a3a; /* Darker background for inputs/selects in dark mode */
+        color: var(--text-color); /* Ensures text is white in dark mode */
+        border-color: #555; /* Adjust border if needed */
+    }
+
+    /* Text within options should also respect theme */
+    body.dark-mode select.form-control option {
+        background-color: #3a3a3a; /* Darker background for options */
+        color: var(--text-color); /* White text for options */
+    }
+
+    .mt-0 {
+        margin-top: 50 !important;
+    }
+</style>
+
+<br /><br />
+<h2 style="text-align: center; margin: 0px;" class="theme-text">
+    <b>Farm Fortune: Your Best Crop Awaits! 💰🌾</b>
+</h2>
+<br />
+
+<div
+    style="
+    width: 350px;
+    height: auto; /* Changed height to auto, safer for varying content */
+    margin: 0px auto;
+    border-radius: 25px;
+    padding: 10px 10px;
+    background-color: var(--card-bg-color); /* Added for theme compatibility */
+    "
+    class="theme-text"
+>
+    <form method="POST" action="{{ url_for('crop_prediction') }}">
+        <div class="form-group">
+            <label for="N" class="theme-text"><b>Nitrogen</b></label>
+            <input
+                type="number"
+                class="form-control"
+                id="Nitrogen"
+                name="nitrogen"
+                placeholder="Enter the value (example: 50)"
+                style="font-weight: bold"
+                required
+            />
+        </div>
+        <div class="form-group">
+            <label for="P" class="theme-text"><b>Phosphorous</b></label>
+            <input
+                type="number"
+                class="form-control"
+                id="Phosphorous"
+                name="phosphorous"
+                placeholder="Enter the value (example: 50)"
+                style="font-weight: bold"
+                required
+            />
+        </div>
+
+        <div class="form-group">
+            <label for="K" class="theme-text"><b>Pottasium</b></label>
+            <input
+                type="number"
+                class="form-control"
+                id="Pottasium"
+                name="pottasium"
+                placeholder="Enter the value (example: 50)"
+                style="font-weight: bold"
+                required
+            />
+        </div>
+
+        <div class="form-group">
+            <label for="temperature" class="theme-text"><b>Temperature (°C)</b></label>
+            <input
+                type="number"
+                step="0.01"
+                class="form-control"
+                id="Temperature"
+                name="temperature"
+                placeholder="Enter the temperature"
+                style="font-weight: bold"
+                required
+            />
+        </div>
+        <div class="form-group">
+            <label for="humidity" class="theme-text"><b>Humidity (%)</b></label>
+            <input
+                type="number"
+                step="0.01"
+                class="form-control"
+                id="Humidity"
+                name="humidity"
+                placeholder="Enter the humidity level"
+                style="font-weight: bold"
+                required
+            />
+        </div>
+        <div class="form-group">
+            <label for="ph" class="theme-text"><b>pH Level</b></label>
+            <input
+                type="number"
+                step="0.01"
+                class="form-control"
+                id="ph"
+                name="ph"
+                placeholder="Enter the value"
+                style="font-weight: bold"
+                required
+            />
+        </div>
+
+        <div class="form-group">
+            <label for="rainfall" class="theme-text"><b>Rainfall (in mm)</b></label>
+            <input
+                type="number"
+                step="0.01"
+                class="form-control"
+                id="Rainfall"
+                name="rainfall"
+                placeholder="Enter the value"
+                style="font-weight: bold"
+                required
+            />
+        </div>
+
+
+        <div class="d-flex justify-content-center">
+            <button
+                type="submit"
+                class="btn btn-info"
+                style="font-weight: bold; border-radius: 12px;"
+            >
+                Predict
+            </button>
+        </div>
+    </form>
+</div>
+
+
+<div class="container py-2 mx-auto my-50 h-10 " style="margin: 12rem auto;">
+    <div class="row">
+        <div class="col-sm py-2 py-md-3">
+            <div class="card card-body" style="justify-content: center; background-color: var(--card-bg-color);">
+                <h1 class="text-center theme-text" style="font-size: 1.5em"><b>You should grow <i>{{ prediction }} </i>in your farm</b></h1>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

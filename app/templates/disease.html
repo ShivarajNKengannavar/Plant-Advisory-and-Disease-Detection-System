@@ -1,0 +1,269 @@
+{% extends 'layout.html' %}
+{% block body %}
+
+<style>
+  .chat-container {
+    max-width: 600px;
+    margin: 40px auto;
+    padding: 20px;
+    background-color: var(--card-bg-color); /* Use variable for background */
+    border-radius: 10px;
+  }
+
+  .chat-log {
+    height: 200px;
+    overflow-y: auto;
+    border: 1px solid var(--text-color); /* Border color based on theme for better visibility */
+    background: var(--chat-log-bg-color); /* Use CSS variable for chat log background */
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+  }
+
+  .chat-log p {
+    margin: 5px 0;
+    color: var(--text-color); /* Ensures chat log text respects theme */
+    font-size: 1.1em !important; /* Increased font size for chat messages */
+  }
+
+  .weather-tips {
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 15px;
+    background-color: var(--card-bg-color); /* Use variable for background */
+    border-radius: 10px;
+    border: 1px solid var(--text-color); /* Border color based on theme */
+    color: var(--text-color); /* Changed to use theme-text-color variable */
+  }
+
+  /* Specific style for inputs in dark mode if needed, otherwise Bootstrap handles it */
+  body.dark-mode input[type="text"].form-control,
+  body.dark-mode select.form-control {
+    background-color: #3a3a3a; /* Darker background for inputs */
+    color: var(--text-color); /* Ensure text is white */
+    border-color: #555; /* Adjust border if needed */
+  }
+
+  /* --- Specific Font Size Increases for Disease.html --- */
+
+  /* Main page title: "Find out which disease has been caught by your plant" */
+  h2.theme-text b {
+      font-size: 2.5em !important; /* Significantly increased for main title */
+      line-height: 1.2;
+  }
+
+  /* "Please Upload The Image" subheading */
+  h2.h4.theme-text b {
+      font-size: 1.5em !important; /* Increased for this subheading */
+  }
+
+  /* Labels: "Select Language for Result:" */
+  .form-group label.theme-text b {
+      font-size: 1.3em !important; /* Increased font size for labels */
+  }
+
+  /* Select dropdown and options */
+  select.form-control {
+      font-size: 1.1em !important; /* Increased font size for dropdown */
+  }
+  select.form-control option {
+      font-size: 1.1em !important; /* Increased font size for dropdown options */
+  }
+
+  /* Weather & Crop Tips Heading */
+  .weather-tips h5.theme-text b {
+      font-size: 1.4em !important; /* Increased for section heading */
+  }
+
+  /* Weather data and crop tip paragraphs */
+  .weather-tips p.theme-text {
+      font-size: 1.1em !important; /* Increased font size for weather/tip text */
+      line-height: 1.5em; /* Adjust line height for readability */
+  }
+
+  /* Ask Plant Disease Assistant Heading */
+  .chat-container h4.theme-text b {
+      font-size: 1.4em !important; /* Increased for chat heading */
+  }
+
+  /* Chatbot input placeholder and button */
+  .input-group .form-control {
+      font-size: 1.1em !important; /* Increased input font size */
+  }
+  .input-group .form-control::placeholder {
+      font-size: 1.1em !important; /* Placeholder matches input */
+  }
+  .input-group-append .btn {
+      font-size: 1.1em !important; /* Increased button font size */
+      height: auto; /* Adjust height to fit text */
+      padding: .6rem 1.2rem; /* Adjust padding */
+  }
+
+  /* Predict button */
+  button.btn-lg.btn-primary.btn-block {
+      font-size: 1.2em !important; /* Increased button font size */
+      height: 55px !important; /* Adjust height to fit larger text */
+      width: 150px !important; /* Adjust width if needed */
+  }
+</style>
+
+<br /><br />
+<h2 style="text-align: center;" class="theme-text">
+  <b>Plant in danger? Let's Diagnose!🌿🔎</b>
+</h2>
+<br><br>
+
+<div style="width: 350px; margin: 0 auto; border-radius: 25px; padding: 10px 10px; font-weight: bold; background-color: var(--card-bg-color);" class="theme-text">
+  <form class="form-signin" method="post" enctype="multipart/form-data">
+    <h2 class="h4 mb-3 font-weight-normal theme-text"><b>Please Upload The Image</b></h2>
+
+    <input type="file" name="file" class="form-control-file" id="inputfile" onchange="preview_image(event)" required>
+    <br><br>
+
+    <div class="form-group">
+      <label for="language" class="theme-text"><b>Select Language for Result:</b></label>
+      <select class="form-control" name="language" id="language" required>
+        <option value="en">English</option>
+        <option value="hi">Hindi</option>
+        <option value="kn">Kannada</option>
+        <option value="ta">Tamil</option>
+        <option value="te">Telugu</option>
+        <option value="mr">Marathi</option>
+      </select>
+    </div>
+
+    <br>
+    <img id="output-image" class="rounded mx-auto d-block" style="max-width: 100%; height: auto;" />
+    <br>
+
+    <button class="btn btn-lg btn-primary btn-block" type="submit" style="font-weight: bold;">Predict</button>
+  </form>
+</div>
+
+<div class="weather-tips" id="weather-tips">
+  <h5 class="theme-text"><b>🌍 Local Weather & Crop Tips</b></h5>
+  <p id="weather-data" class="theme-text">Fetching your location and weather info...</p>
+  <p id="crop-tip" class="theme-text"></p>
+</div>
+
+<div class="chat-container">
+  <h4 style="text-align:center;" class="theme-text"><b>💬 Ask Plant Disease Assistant</b></h4>
+  <div class="chat-log" id="chat-log"></div>
+  <div class="input-group">
+    <input type="text" id="user-input" class="form-control" placeholder="e.g. How to treat yellow leaves?" />
+    <div class="input-group-append">
+      <button class="btn btn-success" onclick="sendMessage()">Ask</button>
+    </div>
+  </div>
+</div>
+
+<script>
+  function preview_image(event) {
+    const reader = new FileReader();
+    reader.onload = function () {
+      const output = document.getElementById('output-image');
+      output.src = reader.result;
+    };
+    reader.readAsDataURL(event.target.files[0]);
+  }
+
+  async function sendMessage() {
+    const input = document.getElementById('user-input');
+    const chatLog = document.getElementById('chat-log');
+
+    const userText = input.value.trim();
+    if (!userText) return;
+
+    chatLog.innerHTML += `<p><b>You:</b> ${userText}</p>`;
+    input.value = '';
+
+    try {
+      const response = await fetch('/ask', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ question: userText })
+      });
+
+      const data = await response.json();
+      const reply = data.response || "Sorry, I couldn't understand your query.";
+      chatLog.innerHTML += `<p><b>Bot:</b> ${reply}</p>`;
+    } catch (err) {
+      chatLog.innerHTML += `<p><b>Bot:</b> I'm unable to respond at the moment.</p>`;
+      console.error('Chatbot error:', err);
+    }
+
+    chatLog.scrollTop = chatLog.scrollHeight;
+  }
+
+  async function fetchWeatherAndTips(lat, lon) {
+    try {
+      const apiKey = "{{ weather_api_key }}";
+      if (!apiKey || apiKey === 'None' || apiKey === '') {
+          throw new Error("Weather API key is not provided or is invalid.");
+      }
+
+      const res = await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric`);
+      if (!res.ok) {
+          const errorData = await res.json();
+          throw new Error(`HTTP error! Status: ${res.status}, Message: ${errorData.message || res.statusText}`);
+      }
+      const data = await res.json();
+
+      const weatherText = `📍 Location: ${data.name}, ${data.sys.country}<br>🌤 Weather: ${data.weather[0].main} (${data.weather[0].description})<br>🌡 Temperature: ${data.main.temp}°C`;
+      document.getElementById('weather-data').innerHTML = weatherText;
+
+      const condition = data.weather[0].main.toLowerCase();
+      let tip = "🌱 General Tip: Ensure proper irrigation and check for pests regularly.";
+
+      if (condition.includes('rain')) {
+        tip = "🌧 It's rainy! Avoid overwatering and watch for fungal growth.";
+      } else if (condition.includes('clear')) {
+        tip = "☀ Clear skies! A good time for photosynthesis, but check for dehydration.";
+      } else if (condition.includes('cloud')) {
+        tip = "☁ Cloudy weather. Monitor for slow growth and limited sunlight.";
+      } else if (condition.includes('thunderstorm')) {
+        tip = "⛈ Heavy storm! Move fragile plants to safe locations.";
+      } else if (condition.includes('snow')) {
+        tip = "❄ Snowfall! Protect sensitive plants from cold damage.";
+      } else if (condition.includes('drizzle')) {
+        tip = "💧 Drizzle. Keep an eye on soil moisture and potential for mild fungal issues.";
+      }
+
+      document.getElementById('crop-tip').innerText = tip;
+
+    } catch (err) {
+      document.getElementById('weather-data').innerText = "Unable to fetch weather info. Error: " + err.message;
+      console.error("Weather error:", err);
+    }
+  }
+
+  function initWeatherWidget() {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        (pos) => {
+          const { latitude, longitude } = pos.coords;
+          fetchWeatherAndTips(latitude, longitude);
+        },
+        (err) => {
+          let errorMessage = "Location access denied.";
+          if (err.code === err.PERMISSION_DENIED) {
+              errorMessage = "Location permission was denied by the user.";
+          } else if (err.code === err.POSITION_UNAVAILABLE) {
+              errorMessage = "Location information is unavailable.";
+          } else if (err.code === err.TIMEOUT) {
+              errorMessage = "The request to get user location timed out.";
+          }
+          document.getElementById('weather-data').innerText = errorMessage;
+          console.error("Geolocation error:", err);
+        },
+        { enableHighAccuracy: true, timeout: 5000, maximumAge: 0 }
+      );
+    } else {
+      document.getElementById('weather-data').innerText = "Geolocation is not supported by your browser.";
+    }
+  }
+
+  document.addEventListener('DOMContentLoaded', initWeatherWidget);
+</script>
+
+{% endblock %}

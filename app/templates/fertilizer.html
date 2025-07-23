@@ -1,0 +1,163 @@
+{% extends 'layout.html' %} {% block body %}
+
+<style>
+    /* REMOVED the html body background-color here.
+       This allows the background to be controlled by the theme in layout.html. */
+
+    /* --- Specific Font Size Increases for Fertilizer.html --- */
+
+    /* Main page title: "No More Over-Feeding! Soil-Based Fertilizer Wisdom. 🛑🧪" */
+    h2.theme-text b {
+        font-size: 2.5em !important; /* Significantly increased for main title */
+        line-height: 1.2;
+    }
+
+    /* Labels: Nitrogen, Phosphorous, Pottasium, Crop you want to grow */
+    .form-group label.theme-text b {
+        font-size: 1.3em !important; /* Increased font size for labels */
+    }
+
+    /* Input placeholders and text within inputs */
+    .form-control {
+        font-size: 1.1em !important; /* Increased font size for input fields */
+    }
+    .form-control::placeholder {
+        font-size: 1.1em !important; /* Ensure placeholder matches */
+    }
+
+    /* Select dropdown options */
+    select.form-control option {
+        font-size: 1.1em !important; /* Increased font size for dropdown options */
+    }
+
+    /* General button font size (for "Predict") */
+    .btn {
+        font-size: 1.2em !important; /* Increased button font size */
+        height: 55px !important; /* Adjust height to fit larger text */
+        width: 150px !important; /* Adjust width if needed */
+    }
+
+    /* Ensure inputs and selects respect theme in dark mode */
+    body.dark-mode .form-control,
+    body.dark-mode select.form-control {
+        background-color: #3a3a3a; /* Darker background for inputs/selects in dark mode */
+        color: var(--text-color); /* Ensures text is white in dark mode */
+        border-color: #555; /* Adjust border if needed */
+    }
+
+    /* Text within options should also respect theme */
+    body.dark-mode select.form-control option {
+        background-color: #3a3a3a; /* Darker background for options */
+        color: var(--text-color); /* White text for options */
+    }
+</style>
+<br /><br />
+<h2 style="text-align: center; margin: 0px;" class="theme-text">
+    <b>No More Over-Feeding! Soil-Based Fertilizer Wisdom. 🛑🧪</b>
+</h2>
+<br />
+
+<div
+    style="
+    width: 350px;
+    height: 40rem; /* Kept fixed height for layout consistency, but consider 'auto' if content varies greatly */
+    margin: 0px auto;
+    border-radius: 25px;
+    padding: 10px 10px;
+    background-color: var(--card-bg-color); /* This is crucial for background to adapt */
+    "
+    class="theme-text"
+>
+    <form method="POST" action="{{ url_for('fert_recommend') }}">
+        <div class="form-group">
+            <label for="Nitrogen" class="theme-text"><b>Nitrogen</b></label>
+            <input
+                type="number"
+                class="form-control"
+                id="Nitrogen"
+                name="nitrogen"
+                placeholder="Enter the value (example:50)"
+                style="font-weight: bold"
+                required
+            />
+        </div>
+        <div class="form-group">
+            <label for="Phosphorous" class="theme-text"
+                ><b>Phosphorous</b></label
+            >
+            <input
+                type="number"
+                class="form-control"
+                id="Phosphorous"
+                name="phosphorous"
+                placeholder="Enter the value (example:50)"
+                style="font-weight: bold"
+                required
+            />
+        </div>
+
+        <div class="form-group">
+            <label for="Pottasium" class="theme-text"><b>Pottasium</b></label>
+            <input
+                type="number"
+                class="form-control"
+                id="Pottasium"
+                name="pottasium"
+                placeholder="Enter the value (example:50)"
+                style="font-weight: bold"
+                required
+            />
+        </div>
+        <div class="form-group">
+            <label for="crop" class="theme-text"
+                ><b>Crop you want to grow</b></label
+            >
+            <select
+                name="cropname"
+                class="form-control"
+                id="crop"
+                placeholder="Select a crop"
+                style="font-weight: bold"
+                required
+            >
+                <option selected>Select crop</option>
+                <option>rice</option>
+                <option>maize</option>
+                <option>chickpea</option>
+                <option>kidneybeans</option>
+                <option>pigeonpeas</option>
+                <option>mothbeans</option>
+                <option>mungbean</option>
+                <option>blackgram</option>
+                <option>lentil</option>
+                <option>pomegranate</option>
+                <option>banana</option>
+                <option>mango</option>
+                <option>grapes</option>
+                <option>watermelon</option>
+                <option>muskmelon</option>
+                <option>apple</option>
+                <option>orange</option>
+                <option>papaya</option>
+                <option>coconut</option>
+                <option>cotton</option>
+                <option>jute</option>
+                <option>coffee</option>
+            </select>
+        </div>
+
+        <div class="d-flex justify-content-center">
+            <button
+                type="submit"
+                class="btn btn-info"
+                style="
+                font-weight: bold;
+                border-radius: 12px;
+                "
+            >
+                Predict
+            </button>
+        </div>
+    </form>
+</div>
+{% endblock %}
